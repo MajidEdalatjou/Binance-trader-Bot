@@ -33,44 +33,111 @@ def managment():
     desired_time_8Hour = current_time + (timedelta(hours=8))
     desired_time_1Day = current_time + (timedelta(days=1))
 
+    print(general_dict)
+
     while (True):
         try:
             current_time = datetime.now(timezone('Africa/Accra'))
             if (current_time.minute == desired_time_1Minute.minute):
                 desired_time_1Minute = current_time + (timedelta(minutes=1))
-                BTCUSDT_1MINUTE.check()
+                for dc_object in digital_currensies_list:
+                    if dc_object.time_frame == '1MINUTE':
+                        dc_object.check()
+                        print("1min main check")
+                for layer_object in layer_confirmation_list:
+                    if layer_object.time_frame == '1MINUTE':
+                        layer_object.update_layer()
+                        print("1min layer check")
             if (current_time.minute == desired_time_3Minute.minute):
                 desired_time_3Minute = current_time + (timedelta(minutes=3))
-                BTCUSDT_3MINUTE.check()
+                for dc_object in digital_currensies_list:
+                    if dc_object.time_frame == '3MINUTE':
+                        dc_object.check()
+                        print("3min main check")
+                for layer_object in layer_confirmation_list:
+                    if layer_object.time_frame == '3MINUTE':
+                        layer_object.update_layer()
+                        print("3min layer check")
             if (current_time.minute == desired_time_5Minute.minute):
                 desired_time_5Minute = current_time + (timedelta(minutes=5))
-                BTCUSDT_5MINUTE.check()
+                for dc_object in digital_currensies_list:
+                    if dc_object.time_frame == '5MINUTE':
+                        dc_object.check()
+                        print("5min layer check")
+                for layer_object in layer_confirmation_list:
+                    if layer_object.time_frame == '5MINUTE':
+                        layer_object.update_layer()
+                        print("5min layer check")
             if (current_time.minute == desired_time_15Minute.minute):
                 desired_time_15Minute = current_time + (timedelta(minutes=15))
-                BTCUSDT_15MINUTE.check()
+                for dc_object in digital_currensies_list:
+                    if dc_object.time_frame == '15MINUTE':
+                        dc_object.check()
+                for layer_object in layer_confirmation_list:
+                    if layer_object.time_frame == '15MINUTE':
+                        layer_object.update_layer()
             if (current_time.minute == desired_time_30Minute.minute):
                 desired_time_30Minute = current_time + (timedelta(minutes=30))
-                BTCUSDT_30MINUTE.check()
+                for dc_object in digital_currensies_list:
+                    if dc_object.time_frame == '30MINUTE':
+                        dc_object.check()
+                for layer_object in layer_confirmation_list:
+                    if layer_object.time_frame == '30MINUTE':
+                        layer_object.update_layer()
             if (current_time.hour == desired_time_1Hour.hour):
                 desired_time_1Hour = current_time + (timedelta(hours=1))
-                BTCUSDT_1HOUR.check()
+                for dc_object in digital_currensies_list:
+                    if dc_object.time_frame == '1HOUR':
+                        dc_object.check()
+                for layer_object in layer_confirmation_list:
+                    if layer_object.time_frame == '1HOUR':
+                        layer_object.update_layer()
             if (current_time.hour == desired_time_2Hour.hour):
                 desired_time_2Hour = current_time + (timedelta(hours=2))
-                BTCUSDT_2HOUR.check()
+                for dc_object in digital_currensies_list:
+                    if dc_object.time_frame == '2HOUR':
+                        dc_object.check()
+                for layer_object in layer_confirmation_list:
+                    if layer_object.time_frame == '2HOUR':
+                        layer_object.update_layer()
             if (current_time.hour == desired_time_4Hour.hour):
                 desired_time_4Hour = current_time + (timedelta(hours=4))
-                BTCUSDT_4HOUR.check()
+                for dc_object in digital_currensies_list:
+                    if dc_object.time_frame == '4HOUR':
+                        dc_object.check()
+                for layer_object in layer_confirmation_list:
+                    if layer_object.time_frame == '4HOUR':
+                        layer_object.update_layer()
             if (current_time.hour == desired_time_6Hour.hour):
                 desired_time_6Hour = current_time + (timedelta(hours=6))
-                BTCUSDT_6HOUR.check()
+                for dc_object in digital_currensies_list:
+                    if dc_object.time_frame == '6HOUR':
+                        dc_object.check()
+                for layer_object in layer_confirmation_list:
+                    if layer_object.time_frame == '6HOUR':
+                        layer_object.update_layer()
             if (current_time.hour == desired_time_8Hour.hour):
                 desired_time_8Hour = current_time + (timedelta(hours=8))
-                BTCUSDT_8HOUR.check()
+                for dc_object in digital_currensies_list:
+                    if dc_object.time_frame == '8HOUR':
+                        dc_object.check()
+                for layer_object in layer_confirmation_list:
+                    if layer_object.time_frame == '8HOUR':
+                        layer_object.update_layer()
             if (current_time.day == desired_time_1Day.day):
                 desired_time_1Day = current_time + (timedelta(days=1))
-                BTCUSDT_1DAY.check()
+                for dc_object in digital_currensies_list:
+                    if dc_object.time_frame == '1DAY':
+                        dc_object.check()
+                for layer_object in layer_confirmation_list:
+                    if layer_object.time_frame == '1DAY':
+                        layer_object.update_layer()
 
+            for dc_object in digital_currensies_list:
+                dc_object.trade()
 
             time.sleep(1)
+
         except Exception as error:
-            print("Connection time out!", error)
+            EMAIL_ACCOUNT.send_email(subject="Connection time out!",
+                                my_message=str(error))
